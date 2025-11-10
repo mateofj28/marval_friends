@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import '../../../../core/theme/app_colors.dart';
+
+class TransactionHistory extends StatelessWidget {
+  const TransactionHistory({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Historial de transacciones',
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: AppColors.darkNavy,
+            ),
+          ),
+          const SizedBox(height: 16),
+          _TransactionItem(
+            tier: 'Bronze:',
+            count: '1',
+            label: 'referido efectivo',
+          ),
+          const SizedBox(height: 12),
+          _TransactionItem(
+            tier: 'Plata:',
+            count: '2',
+            label: 'referidos efectivos',
+          ),
+          const SizedBox(height: 12),
+          _TransactionItem(
+            tier: 'Plata:',
+            count: '23',
+            label: 'referidos efectivos',
+          ),
+          const SizedBox(height: 12),
+          _TransactionItem(
+            tier: 'Oro:',
+            count: '4-5',
+            label: 'referidos efectivos',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TransactionItem extends StatelessWidget {
+  final String tier;
+  final String count;
+  final String label;
+
+  const _TransactionItem({
+    required this.tier,
+    required this.count,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(
+          Iconsax.tick_circle5,
+          color: AppColors.primaryBlue,
+          size: 20,
+        ),
+        const SizedBox(width: 12),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: '$tier ',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.darkNavy,
+                ),
+              ),
+              TextSpan(
+                text: count,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primaryBlue,
+                ),
+              ),
+              TextSpan(
+                text: ' $label',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.primaryBlue,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
