@@ -7,15 +7,25 @@ class ReferralHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(20),
-      child: Text(
-        'Referir un amigo',
-        style: GoogleFonts.poppins(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          color: AppColors.primaryBlue,
-        ),
+      color: AppColors.white,
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppColors.primaryBlue),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            'Referir un amigo',
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primaryBlue,
+            ),
+          ),
+        ],
       ),
     );
   }

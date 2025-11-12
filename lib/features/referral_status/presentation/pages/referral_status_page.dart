@@ -12,46 +12,34 @@ class ReferralStatusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final referrals = [
       {
-        'name': 'Sin contactar',
-        'status': 'in contactar',
-        'code': '#004085',
-        'color': AppColors.primaryBlue,
-        'progress': 0.7,
-      },
-      {
-        'name': 'Intentando contactar',
-        'status': 'Cotización',
-        'code': '#004952',
-        'color': AppColors.primaryCyan,
-        'progress': 0.5,
-      },
-      {
-        'name': 'Cotización',
-        'status': 'Opcionado',
-        'code': '#004080',
-        'color': Colors.red,
-        'progress': 0.5,
-      },
-      {
-        'name': 'Oacicaro',
-        'status': 'Regt Statues',
-        'code': '#001960',
-        'color': AppColors.primaryCyan,
-        'progress': 0.6,
-      },
-      {
-        'name': 'Opcionado',
-        'status': 'Sctionnado',
-        'code': '#002265',
-        'color': AppColors.gold,
+        'name': '¡Gracias por registrar a tu amigo!',
+        'status': 'Sin Contactar',
+        'color': const Color(0xFF004952),
         'progress': 0.2,
       },
       {
-        'name': 'Cerrado Ganado',
-        'status': 'Last Statues',
-        'code': '#001085',
-        'color': Colors.pink,
-        'progress': 0.3,
+        'name': '¡Nos estamos poniendo en contacto con tu amigo!',
+        'status': 'Intentando Contactar',
+        'color': const Color(0xFF2196F3),
+        'progress': 0.4,
+      },
+      {
+        'name': '¡Tu amigo ya cotizó su vivienda!',
+        'status': 'Cotización',
+        'color': const Color(0xFFFFA726),
+        'progress': 0.6,
+      },
+      {
+        'name': '¡Tu amigo está a un paso de convertirse en un Amigo Marval!',
+        'status': 'Opcionado',
+        'color': const Color(0xFF9C27B0),
+        'progress': 0.8,
+      },
+      {
+        'name': '¡Felicidades, has ganado!',
+        'status': 'Cerrado Ganado',
+        'color': const Color(0xFF4CAF50),
+        'progress': 1.0,
       },
     ];
 
@@ -73,7 +61,6 @@ class ReferralStatusPage extends StatelessWidget {
                         return ReferralStatusCard(
                           name: referral['name'] as String,
                           status: referral['status'] as String,
-                          code: referral['code'] as String,
                           statusColor: referral['color'] as Color,
                           progress: referral['progress'] as double,
                         );

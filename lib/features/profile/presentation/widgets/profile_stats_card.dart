@@ -17,7 +17,7 @@ class ProfileStatsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'User Statistics',
+                'Estadísticas de usuario',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -37,21 +37,21 @@ class ProfileStatsCard extends StatelessWidget {
               Expanded(
                 child: _StatCard(
                   value: '3.00',
-                  label: 'Total referrals\nmade',
+                  label: 'Total de\nreferidos',
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _StatCard(
                   value: '2.50',
-                  label: 'Successful\nreferrals',
+                  label: 'Referidos\nexitosos',
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _StatCard(
                   value: '3.30',
-                  label: 'Total rewards\nearned',
+                  label: 'Total de\nrecompensas',
                 ),
               ),
             ],

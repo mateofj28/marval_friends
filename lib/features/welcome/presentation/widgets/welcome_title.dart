@@ -10,7 +10,7 @@ class WelcomeTitle extends StatelessWidget {
     return Text(
       'Welcome',
       style: GoogleFonts.poppins(
-        fontSize: 48,
+        fontSize: 32,
         fontWeight: FontWeight.bold,
         color: AppColors.primaryBlue,
       ),

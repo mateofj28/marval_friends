@@ -9,7 +9,7 @@ class FilterChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

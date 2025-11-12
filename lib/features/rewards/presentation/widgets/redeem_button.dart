@@ -18,7 +18,7 @@ class RedeemButton extends StatelessWidget {
         children: [
           SizedBox(
             width: double.infinity,
-            height: 56,
+            height: 70,
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
@@ -38,16 +38,7 @@ class RedeemButton extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'RGB 211 100 26',
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: AppColors.textSecondary,
-            ),
-          ),
+          ),          
         ],
       ),
     );

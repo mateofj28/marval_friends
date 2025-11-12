@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -7,6 +8,11 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final String hint;
   final bool isPassword;
+  final bool enabled;
+  final int? maxLength;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final IconData? icon;
 
   const CustomTextField({
     super.key,
@@ -14,6 +20,11 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     required this.hint,
     this.isPassword = false,
+    this.enabled = true,
+    this.maxLength,
+    this.keyboardType,
+    this.inputFormatters,
+    this.icon,
   });
 
   @override
@@ -24,32 +35,39 @@ class CustomTextField extends StatelessWidget {
         TextField(
           controller: controller,
           obscureText: isPassword,
+          enabled: enabled,
+          maxLength: maxLength,
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           style: GoogleFonts.poppins(
             color: AppColors.white,
             fontSize: 16,
           ),
           decoration: InputDecoration(
-            labelText: label,
             hintText: hint,
+            prefixIcon: icon != null
+                ? Icon(
+                    icon,
+                    color: AppColors.white.withValues(alpha: 0.7),
+                    size: 24,
+                  )
+                : null,
             filled: true,
             fillColor: AppColors.buttonSecondary,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide.none,
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 24,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: icon != null ? 16 : 24,
               vertical: 20,
             ),
-            labelStyle: GoogleFonts.poppins(
-              color: AppColors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
             hintStyle: GoogleFonts.poppins(
-              color: AppColors.textLight.withValues(alpha: 0.5),
-              fontSize: 14,
+              color: AppColors.white.withValues(alpha: 0.7),
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
             ),
+            counterText: '',
           ),
         ),
       ],

@@ -24,17 +24,16 @@ class HomeContent extends StatelessWidget {
                 MenuCard(
                   icon: Iconsax.user_add,
                   title: 'Referir',
-                  subtitle: 'Referer Friend',
+                  subtitle: 'Refer',
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const ReferralPage(),
                   ),
-                  showBorder: true,
                 ),
                 MenuCard(
                   icon: Iconsax.chart,
                   title: 'Estado de mis referidos',
-                  subtitle: 'Status of yor refenlals',
+                  subtitle: 'status of my referrals',
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const ReferralStatusPage(),
@@ -43,7 +42,7 @@ class HomeContent extends StatelessWidget {
                 MenuCard(
                   icon: Iconsax.gift,
                   title: 'Redimir premios',
-                  subtitle: 'Redeemb Rewards',
+                  subtitle: 'redeem prizes',
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const RewardsPage(),
@@ -52,7 +51,7 @@ class HomeContent extends StatelessWidget {
                 MenuCard(
                   icon: Iconsax.cup,
                   title: 'Plan de premios',
-                  subtitle: 'Eewards plan',
+                  subtitle: 'Rewards plan',
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const RewardsPlanPage(),

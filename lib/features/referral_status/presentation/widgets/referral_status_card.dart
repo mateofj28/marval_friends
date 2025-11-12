@@ -5,7 +5,6 @@ import '../../../../core/theme/app_colors.dart';
 class ReferralStatusCard extends StatelessWidget {
   final String name;
   final String status;
-  final String code;
   final Color statusColor;
   final double progress;
 
@@ -13,7 +12,6 @@ class ReferralStatusCard extends StatelessWidget {
     super.key,
     required this.name,
     required this.status,
-    required this.code,
     required this.statusColor,
     required this.progress,
   });
@@ -56,61 +54,45 @@ class ReferralStatusCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        name,
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.darkNavy,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      code,
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textLight,
-                      ),
-                    ),
-                  ],
+                Text(
+                  name,
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.darkNavy,
+                    height: 1.4,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     Container(
-                      width: 8,
-                      height: 8,
+                      width: 10,
+                      height: 10,
                       decoration: BoxDecoration(
                         color: statusColor,
                         shape: BoxShape.circle,
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      status,
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textLight,
+                    Expanded(
+                      child: Text(
+                        status,
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 8),
-                // Progress bar
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: LinearProgressIndicator(
                     value: progress,
-                    minHeight: 6,
+                    minHeight: 8,
                     backgroundColor: AppColors.background,
                     valueColor: AlwaysStoppedAnimation<Color>(statusColor),
                   ),

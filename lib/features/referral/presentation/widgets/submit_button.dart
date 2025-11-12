@@ -16,7 +16,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 70,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

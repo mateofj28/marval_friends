@@ -35,12 +35,6 @@ class _HomePageState extends State<HomePage> {
         return const ProfileContent();
       case 2:
         return const NotificationsContent();
-      case 3:
-        // TODO: Settings content
-        return const Center(child: Text('Settings'));
-      case 4:
-        // TODO: Settings content
-        return const Center(child: Text('Settings'));
       default:
         return const HomeContent();
     }

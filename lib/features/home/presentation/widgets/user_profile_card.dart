@@ -2,10 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/auth/data/datasources/user_storage.dart';
+import '../../../../core/di/injection.dart';
 import 'tier_badge.dart';
 
-class UserProfileCard extends StatelessWidget {
+class UserProfileCard extends StatefulWidget {
   const UserProfileCard({super.key});
+
+  @override
+  State<UserProfileCard> createState() => _UserProfileCardState();
+}
+
+class _UserProfileCardState extends State<UserProfileCard> {
+  String _userName = 'Usuario';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    final userStorage = getIt<UserStorage>();
+    final user = await userStorage.getUser();
+    if (user != null && mounted) {
+      setState(() {
+        _userName = user.nombre;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +75,7 @@ class UserProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Amigos Marval',
+                  _userName,
                   style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -63,17 +88,17 @@ class UserProfileCard extends StatelessWidget {
                   runSpacing: 6,
                   children: [
                     TierBadge(
-                      label: 'Bronze',
+                      label: 'Bronce',
                       color: AppColors.bronze,
                       isActive: true,
                     ),
                     TierBadge(
-                      label: 'Silver',
+                      label: 'Plata',
                       color: AppColors.silver,
                       isActive: false,
                     ),
                     TierBadge(
-                      label: 'Gold',
+                      label: 'Oro',
                       color: AppColors.gold,
                       isActive: false,
                     ),

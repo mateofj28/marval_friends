@@ -62,7 +62,7 @@ class WalletBalance extends StatelessWidget {
           Text(
             amount,
             style: GoogleFonts.poppins(
-              fontSize: 48,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
               color: AppColors.primaryBlue,
             ),

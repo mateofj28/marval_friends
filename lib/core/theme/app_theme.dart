@@ -18,7 +18,7 @@ class AppTheme {
           backgroundColor: AppColors.buttonPrimary,
           foregroundColor: AppColors.white,
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

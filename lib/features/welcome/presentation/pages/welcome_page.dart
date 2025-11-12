@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/welcome_logo.dart';
-import '../widgets/welcome_title.dart';
 import '../widgets/welcome_form.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -18,9 +16,12 @@ class WelcomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 60),
-                const WelcomeLogo(),
-                const SizedBox(height: 80),
-                const WelcomeTitle(),
+                Center(
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    height: 180,
+                  ),
+                ),
                 const SizedBox(height: 60),
                 const WelcomeForm(),
                 const SizedBox(height: 40),

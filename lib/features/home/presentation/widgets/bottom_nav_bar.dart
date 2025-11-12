@@ -31,33 +31,21 @@ class BottomNavBar extends StatelessWidget {
             children: [
               _NavItem(
                 icon: Iconsax.home_15,
-                label: 'Home',
+                label: 'Inicio',
                 isActive: currentIndex == 0,
                 onTap: () => onTap(0),
               ),
               _NavItem(
                 icon: Iconsax.grid_1,
-                label: 'Profile',
+                label: 'Perfil',
                 isActive: currentIndex == 1,
                 onTap: () => onTap(1),
               ),
               _NavItem(
                 icon: Iconsax.notification,
-                label: 'Notifications',
+                label: 'Notificaciones',
                 isActive: currentIndex == 2,
                 onTap: () => onTap(2),
-              ),
-              _NavItem(
-                icon: Iconsax.shield_tick,
-                label: 'Settings',
-                isActive: currentIndex == 3,
-                onTap: () => onTap(3),
-              ),
-              _NavItem(
-                icon: Iconsax.setting_2,
-                label: 'Settings',
-                isActive: currentIndex == 4,
-                onTap: () => onTap(4),
               ),
             ],
           ),

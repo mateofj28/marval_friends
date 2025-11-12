@@ -2,10 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/auth/data/datasources/user_storage.dart';
+import '../../../../core/di/injection.dart';
 import '../../../home/presentation/widgets/tier_badge.dart';
 
-class ProfileHeader extends StatelessWidget {
+class ProfileHeader extends StatefulWidget {
   const ProfileHeader({super.key});
+
+  @override
+  State<ProfileHeader> createState() => _ProfileHeaderState();
+}
+
+class _ProfileHeaderState extends State<ProfileHeader> {
+  String _userName = 'Usuario';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    final userStorage = getIt<UserStorage>();
+    final user = await userStorage.getUser();
+    if (user != null && mounted) {
+      setState(() {
+        _userName = user.nombre;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +62,7 @@ class ProfileHeader extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Bronze Bronte',
+            _userName,
             style: GoogleFonts.poppins(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -50,19 +75,19 @@ class ProfileHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TierBadge(
-                label: 'Bronze',
+                label: 'Bronce',
                 color: AppColors.bronze,
                 isActive: true,
               ),
               SizedBox(width: 8),
               TierBadge(
-                label: 'Silver',
+                label: 'Plata',
                 color: AppColors.silver,
                 isActive: false,
               ),
               SizedBox(width: 8),
               TierBadge(
-                label: 'Gold',
+                label: 'Oro',
                 color: AppColors.gold,
                 isActive: false,
               ),

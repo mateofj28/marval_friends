@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/navigation_helper.dart';
 import '../widgets/rewards_header.dart';
 import '../widgets/wallet_balance.dart';
 import '../widgets/tier_requirements.dart';
 import '../widgets/transaction_history.dart';
 import '../widgets/redeem_button.dart';
+import '../../../rewards_redeem/presentation/pages/rewards_redeem_page.dart';
 
 class RewardsPage extends StatelessWidget {
   const RewardsPage({super.key});
@@ -30,7 +32,10 @@ class RewardsPage extends StatelessWidget {
                     const TransactionHistory(),
                     RedeemButton(
                       onPressed: () {
-                        // TODO: Implement redeem logic
+                        NavigationHelper.navigateWithSlideAnimation(
+                          context,
+                          const RewardsRedeemPage(),
+                        );
                       },
                     ),
                   ],

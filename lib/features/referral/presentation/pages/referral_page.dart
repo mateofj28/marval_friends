@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/referral_header.dart';
-import '../widgets/referral_dropdown.dart';
 import '../widgets/referral_text_field.dart';
 import '../widgets/referral_question.dart';
 import '../widgets/submit_button.dart';
@@ -19,8 +19,7 @@ class _ReferralPageState extends State<ReferralPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  String? _selectedName;
-  bool _wantsPedroAttention = false;
+  bool _wantsCarolinaAttention = false;
 
   @override
   void dispose() {
@@ -52,25 +51,16 @@ class _ReferralPageState extends State<ReferralPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    ReferralDropdown(
-                      value: _selectedName,
+                    ReferralTextField(
+                      controller: _nameController,
                       hint: 'Nombre completo',
-                      items: const [
-                        'Juan Pérez',
-                        'María García',
-                        'Carlos López',
-                        'Ana Martínez',
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedName = value;
-                        });
-                      },
+                      keyboardType: TextInputType.name,
                     ),
                     ReferralTextField(
                       controller: _idController,
                       hint: 'Numero de cédula',
                       keyboardType: TextInputType.number,
+                      maxLength: 10,
                     ),
                     ReferralTextField(
                       controller: _emailController,
@@ -81,15 +71,16 @@ class _ReferralPageState extends State<ReferralPage> {
                       controller: _phoneController,
                       hint: 'Teléfono',
                       keyboardType: TextInputType.phone,
+                      maxLength: 10,
                     ),
                     const SizedBox(height: 20),
                     ReferralQuestion(
                       question:
-                          '¿Deseas que Pedro también\natienda a tu amigo?',
-                      value: _wantsPedroAttention,
+                          'A ti te atendió Carolina. ¿Deseas que también atienda a tu amigo?',
+                      value: _wantsCarolinaAttention,
                       onChanged: (value) {
                         setState(() {
-                          _wantsPedroAttention = value;
+                          _wantsCarolinaAttention = value;
                         });
                       },
                     ),

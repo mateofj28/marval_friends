@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -14,32 +13,9 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              // Logo
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  color: AppColors.orange,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Iconsax.home_15,
-                  color: AppColors.white,
-                  size: 28,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                'Marval',
-                style: GoogleFonts.poppins(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkNavy,
-                ),
-              ),
-            ],
+          Image.asset(
+            'assets/images/logo.png',
+            height: 48,
           ),
           // Notification icon
           Container(

@@ -24,14 +24,8 @@ class MenuCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: AppColors.cardBlue,
-        borderRadius: BorderRadius.circular(20),
-        border: showBorder
-            ? Border.all(
-                color: AppColors.orange,
-                width: 3,
-              )
-            : null,
+        color: const Color(0xFFABDBF7),
+        borderRadius: BorderRadius.circular(20),        
       ),
       child: Material(
         color: Colors.transparent,
@@ -43,18 +37,10 @@ class MenuCard extends StatelessWidget {
             child: Row(
               children: [
                 // Icon
-                Container(
-                  width: 56,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: AppColors.orange.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: AppColors.orange,
-                    size: 32,
-                  ),
+                Icon(
+                  icon,
+                  color: AppColors.orange,
+                  size: 42,
                 ),
                 const SizedBox(width: 16),
                 // Text
@@ -67,7 +53,7 @@ class MenuCard extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.white,
+                          color: const Color(0xFF0A1834),
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -76,7 +62,7 @@ class MenuCard extends StatelessWidget {
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.textLight,
+                          color: const Color(0xFF376185),
                         ),
                       ),
                     ],
@@ -85,7 +71,7 @@ class MenuCard extends StatelessWidget {
                 // Arrow
                 const Icon(
                   Iconsax.arrow_right_3,
-                  color: AppColors.textLight,
+                  color: Color(0xFF0A1834),
                   size: 20,
                 ),
               ],

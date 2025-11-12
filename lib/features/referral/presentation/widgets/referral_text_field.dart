@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -6,12 +7,14 @@ class ReferralTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputType? keyboardType;
+  final int? maxLength;
 
   const ReferralTextField({
     super.key,
     required this.controller,
     required this.hint,
     this.keyboardType,
+    this.maxLength,
   });
 
   @override
@@ -21,11 +24,16 @@ class ReferralTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         keyboardType: keyboardType,
+        maxLength: maxLength,
+        inputFormatters: maxLength != null
+            ? [LengthLimitingTextInputFormatter(maxLength)]
+            : null,
         style: GoogleFonts.poppins(
           fontSize: 16,
           color: AppColors.darkNavy,
         ),
         decoration: InputDecoration(
+          counterText: '',
           hintText: hint,
           hintStyle: GoogleFonts.poppins(
             fontSize: 16,
