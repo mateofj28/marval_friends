@@ -69,21 +69,6 @@ class ReferralUserHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  phone,
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                Text(
-                  email,
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
                   'Fecha de referencia: $referralDate',
                   style: GoogleFonts.poppins(
                     fontSize: 12,
