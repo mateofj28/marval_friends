@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../notifications/presentation/pages/notifications_page.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -18,16 +19,25 @@ class HomeHeader extends StatelessWidget {
             height: 48,
           ),
           // Notification icon
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: AppColors.background,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Icon(
-              Iconsax.notification,
-              color: AppColors.primaryBlue,
-              size: 24,
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const NotificationsPage(),
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Iconsax.notification,
+                color: AppColors.primaryBlue,
+                size: 24,
+              ),
             ),
           ),
         ],
