@@ -8,7 +8,12 @@ import '../../../../core/di/injection.dart';
 import 'tier_badge.dart';
 
 class UserProfileCard extends StatefulWidget {
-  const UserProfileCard({super.key});
+  final VoidCallback? onTap;
+
+  const UserProfileCard({
+    super.key,
+    this.onTap,
+  });
 
   @override
   State<UserProfileCard> createState() => _UserProfileCardState();
@@ -35,21 +40,23 @@ class _UserProfileCardState extends State<UserProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: context.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: context.surface,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
         children: [
           // Avatar
           Container(
@@ -99,6 +106,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
             size: 20,
           ),
         ],
+      ),
       ),
     );
   }

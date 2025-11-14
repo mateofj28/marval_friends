@@ -25,6 +25,14 @@ class _HomePageState extends State<HomePage> {
     // TODO: Implement chat functionality
   }
 
+  void _navigateToProfile() {
+    _pageController.animateToPage(
+      1,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +45,9 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: PageView(
                 controller: _pageController,
-                children: const [
-                  HomeContent(),
-                  ProfileContent(),
+                children: [
+                  HomeContent(onProfileTap: _navigateToProfile),
+                  const ProfileContent(),
                 ],
               ),
             ),

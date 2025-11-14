@@ -9,14 +9,19 @@ import '../../../rewards/presentation/pages/rewards_page.dart';
 import '../../../rewards_plan/presentation/pages/rewards_plan_page.dart';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
+  final VoidCallback onProfileTap;
+
+  const HomeContent({
+    super.key,
+    required this.onProfileTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const UserProfileCard(),
+          UserProfileCard(onTap: onProfileTap),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
