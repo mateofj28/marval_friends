@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class TierRequirements extends StatelessWidget {
   const TierRequirements({super.key});
@@ -53,18 +54,21 @@ class TierRequirements extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           _RequirementItem(
-            tier: 'Bronze:',
-            requirement: '1 referido efectivo',
+            context: context,
+            tier: context.tr('rewards.tier_bronze'),
+            requirement: '1 ${context.tr('rewards.effective_referral')}',
           ),
           const SizedBox(height: 8),
           _RequirementItem(
-            tier: 'Plata:',
-            requirement: '2-3 referidos efectivos',
+            context: context,
+            tier: context.tr('rewards.tier_silver'),
+            requirement: '2-3 ${context.tr('rewards.effective_referrals')}',
           ),
           const SizedBox(height: 8),
           _RequirementItem(
-            tier: 'Oro:',
-            requirement: '4-5 referidos efectivos',
+            context: context,
+            tier: context.tr('rewards.tier_gold'),
+            requirement: '4-5 ${context.tr('rewards.effective_referrals')}',
           ),
         ],
       ),
@@ -73,16 +77,18 @@ class TierRequirements extends StatelessWidget {
 }
 
 class _RequirementItem extends StatelessWidget {
+  final BuildContext context;
   final String tier;
   final String requirement;
 
   const _RequirementItem({
+    required this.context,
     required this.tier,
     required this.requirement,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -91,7 +97,7 @@ class _RequirementItem extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: context.darkNavy,
+            color: buildContext.darkNavy,
           ),
         ),
         const SizedBox(width: 4),
@@ -100,7 +106,7 @@ class _RequirementItem extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: context.primaryBlue,
+            color: buildContext.primaryBlue,
           ),
         ),
       ],

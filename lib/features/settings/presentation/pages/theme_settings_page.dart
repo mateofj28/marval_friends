@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_colors_dark.dart';
 import '../../../../core/theme/theme_provider.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class ThemeSettingsPage extends StatelessWidget {
   const ThemeSettingsPage({super.key});
@@ -44,7 +45,7 @@ class ThemeSettingsPage extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Apariencia',
+              context.tr('settings.appearance'),
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -68,7 +69,7 @@ class ThemeSettingsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Tema de la aplicación',
+            context.tr('settings.theme_title'),
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -78,8 +79,8 @@ class ThemeSettingsPage extends StatelessWidget {
           const SizedBox(height: 16),
           _buildThemeOption(
             context: context,
-            title: 'Claro',
-            subtitle: 'Usa el tema claro',
+            title: context.tr('settings.theme_light'),
+            subtitle: context.tr('settings.theme_light_subtitle'),
             icon: Iconsax.sun_1,
             isSelected: themeProvider.themeMode == AppThemeMode.light,
             onTap: () => themeProvider.setThemeMode(AppThemeMode.light),
@@ -88,8 +89,8 @@ class ThemeSettingsPage extends StatelessWidget {
           const SizedBox(height: 12),
           _buildThemeOption(
             context: context,
-            title: 'Oscuro',
-            subtitle: 'Usa el tema oscuro',
+            title: context.tr('settings.theme_dark'),
+            subtitle: context.tr('settings.theme_dark_subtitle'),
             icon: Iconsax.moon,
             isSelected: themeProvider.themeMode == AppThemeMode.dark,
             onTap: () => themeProvider.setThemeMode(AppThemeMode.dark),
@@ -98,8 +99,8 @@ class ThemeSettingsPage extends StatelessWidget {
           const SizedBox(height: 12),
           _buildThemeOption(
             context: context,
-            title: 'Sistema',
-            subtitle: 'Usa la configuración del sistema',
+            title: context.tr('settings.theme_system'),
+            subtitle: context.tr('settings.theme_system_subtitle'),
             icon: Iconsax.mobile,
             isSelected: themeProvider.themeMode == AppThemeMode.system,
             onTap: () => themeProvider.setThemeMode(AppThemeMode.system),

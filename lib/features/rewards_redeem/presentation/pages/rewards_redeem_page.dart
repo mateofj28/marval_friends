@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../coupon_generation/presentation/pages/coupon_generation_page.dart';
 
 class RewardsRedeemPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            'Filtrar por categoria',
+            context.tr('rewards.filter_category'),
             style: GoogleFonts.poppins(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -37,13 +38,13 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildFilterOption('Restaurantes'),
-              _buildFilterOption('Supermercado'),
-              _buildFilterOption('Viajes'),
-              _buildFilterOption('Cine'),
-              _buildFilterOption('Comercios'),
+              _buildFilterOption(context.tr('rewards.restaurants')),
+              _buildFilterOption(context.tr('rewards.supermarket')),
+              _buildFilterOption(context.tr('rewards.travel')),
+              _buildFilterOption(context.tr('rewards.cinema')),
+              _buildFilterOption(context.tr('rewards.commerce')),
               const Divider(),
-              _buildFilterOption('Todos', isAll: true),
+              _buildFilterOption(context.tr('rewards.all'), isAll: true),
             ],
           ),
         );
@@ -110,7 +111,7 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
           ),
           Expanded(
             child: Text(
-              'Redimir Premios',
+              context.tr('headers.rewards'),
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -147,7 +148,7 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
           color: context.darkNavy,
         ),
         decoration: InputDecoration(
-          hintText: 'Buscar marca...',
+          hintText: context.tr('rewards.search'),
           hintStyle: GoogleFonts.poppins(
             fontSize: 16,
             color: context.textLight,
@@ -201,27 +202,33 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
   }
 
   Widget _buildBrandGrid() {
+    final restaurants = context.tr('rewards.restaurants');
+    final supermarket = context.tr('rewards.supermarket');
+    final travel = context.tr('rewards.travel');
+    final cinema = context.tr('rewards.cinema');
+    final commerce = context.tr('rewards.commerce');
+    
     final allBrands = [
-      {'name': 'cinecolombia', 'color': const Color(0xFFFFFFFF), 'category': 'Cine'},
-      {'name': 'calzatodo', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'directv', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'decathlon', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'dafiti', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'cromantic', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'crepeswaffles', 'color': const Color(0xFFFFFFFF), 'category': 'Restaurantes'},
-      {'name': 'babyfresh', 'color': const Color(0xFFFFFFFF), 'category': 'Comercios'},
-      {'name': 'beerstation', 'color': const Color(0xFFFFFFFF), 'category': 'Restaurantes'},
-      {'name': 'aviatur', 'color': const Color(0xFFFFFFFF), 'category': 'Viajes'},
-      {'name': 'burgerking', 'color': const Color(0xFFFFFFFF), 'category': 'Restaurantes'},
-      {'name': 'alkosto', 'color': const Color(0xFFFFFFFF), 'category': 'Supermercado'},
-      {'name': 'exito', 'color': const Color(0xFFFFEB00), 'category': 'Supermercado'},
-      {'name': 'falabella', 'color': const Color(0xFFB8D62E), 'category': 'Comercios'},
-      {'name': 'surtimax', 'color': const Color(0xFF106D35), 'category': 'Supermercado'},
-      {'name': 'makro', 'color': const Color(0xFFFFFFFF), 'category': 'Supermercado'},
-      {'name': 'daviplata', 'color': const Color(0xFFE91E2C), 'category': 'Comercios'},
-      {'name': 'carulla', 'color': const Color(0xFF5DBD01), 'category': 'Supermercado'},
-      {'name': 'superinter', 'color': const Color(0xFF980000), 'category': 'Supermercado'},
-      {'name': 'mayorista', 'color': const Color(0xFFFFFFFF), 'category': 'Supermercado'},
+      {'name': 'cinecolombia', 'color': const Color(0xFFFFFFFF), 'category': cinema},
+      {'name': 'calzatodo', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'directv', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'decathlon', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'dafiti', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'cromantic', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'crepeswaffles', 'color': const Color(0xFFFFFFFF), 'category': restaurants},
+      {'name': 'babyfresh', 'color': const Color(0xFFFFFFFF), 'category': commerce},
+      {'name': 'beerstation', 'color': const Color(0xFFFFFFFF), 'category': restaurants},
+      {'name': 'aviatur', 'color': const Color(0xFFFFFFFF), 'category': travel},
+      {'name': 'burgerking', 'color': const Color(0xFFFFFFFF), 'category': restaurants},
+      {'name': 'alkosto', 'color': const Color(0xFFFFFFFF), 'category': supermarket},
+      {'name': 'exito', 'color': const Color(0xFFFFEB00), 'category': supermarket},
+      {'name': 'falabella', 'color': const Color(0xFFB8D62E), 'category': commerce},
+      {'name': 'surtimax', 'color': const Color(0xFF106D35), 'category': supermarket},
+      {'name': 'makro', 'color': const Color(0xFFFFFFFF), 'category': supermarket},
+      {'name': 'daviplata', 'color': const Color(0xFFE91E2C), 'category': commerce},
+      {'name': 'carulla', 'color': const Color(0xFF5DBD01), 'category': supermarket},
+      {'name': 'superinter', 'color': const Color(0xFF980000), 'category': supermarket},
+      {'name': 'mayorista', 'color': const Color(0xFFFFFFFF), 'category': supermarket},
     ];
 
     var filteredBrands = allBrands;
@@ -246,7 +253,7 @@ class _RewardsRedeemPageState extends State<RewardsRedeemPage> {
         child: Padding(
           padding: const EdgeInsets.all(40),
           child: Text(
-            'No se encontraron marcas',
+            context.tr('rewards.no_brands'),
             style: GoogleFonts.poppins(
               fontSize: 16,
               color: context.textSecondary,

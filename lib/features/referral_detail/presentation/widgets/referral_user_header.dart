@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class ReferralUserHeader extends StatelessWidget {
   final String userName;
@@ -73,7 +74,7 @@ class ReferralUserHeader extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Fecha de referencia: $referralDate',
+                      '${context.tr('referral_detail.reference_date')}: $referralDate',
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: context.textSecondary,
@@ -91,21 +92,21 @@ class ReferralUserHeader extends StatelessWidget {
           _buildInfoRow(
             context,
             icon: Iconsax.card,
-            label: 'Cedula',
+            label: context.tr('referral_detail.cedula'),
             value: cedula,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
             icon: Iconsax.sms,
-            label: 'Correo',
+            label: context.tr('referral_detail.email'),
             value: email,
           ),
           const SizedBox(height: 12),
           _buildInfoRow(
             context,
             icon: Iconsax.call,
-            label: 'Telefono',
+            label: context.tr('referral_detail.phone'),
             value: phone,
           ),
         ],

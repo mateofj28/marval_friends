@@ -4,6 +4,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class CouponDisplay extends StatelessWidget {
   final String brandName;
@@ -26,7 +27,7 @@ class CouponDisplay extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildSuccessMessage(),
+          _buildSuccessMessage(context),
           const SizedBox(height: 24),
           _buildCouponCard(context),
           const SizedBox(height: 24),
@@ -36,7 +37,7 @@ class CouponDisplay extends StatelessWidget {
     );
   }
 
-  Widget _buildSuccessMessage() {
+  Widget _buildSuccessMessage(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -67,7 +68,7 @@ class CouponDisplay extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Cupon generado!',
+                  context.tr('coupon.generated_title'),
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -76,7 +77,7 @@ class CouponDisplay extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Tu cupon esta listo para usar',
+                  context.tr('coupon.generated_message'),
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.green.shade700,
@@ -193,7 +194,7 @@ class CouponDisplay extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Codigo del cupon',
+          context.tr('coupon.code'),
           style: GoogleFonts.poppins(
             fontSize: 14,
             color: context.textSecondary,
@@ -261,7 +262,7 @@ class CouponDisplay extends StatelessWidget {
         ),
       ),
       child: Text(
-        'Generar nuevo cupon',
+        context.tr('coupon.generate_new'),
         style: GoogleFonts.poppins(
           fontSize: 16,
           fontWeight: FontWeight.w600,

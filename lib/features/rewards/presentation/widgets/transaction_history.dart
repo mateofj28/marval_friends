@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class TransactionHistory extends StatelessWidget {
   const TransactionHistory({super.key});
@@ -26,7 +27,7 @@ class TransactionHistory extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Historial de transacciones',
+            context.tr('rewards.transaction_history'),
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,

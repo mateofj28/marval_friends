@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class StatusTimeline extends StatelessWidget {
   final int currentStep;
@@ -13,11 +14,11 @@ class StatusTimeline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final steps = [
-      {'label': 'Sin\ncontactar', 'step': 1},
-      {'label': 'Intentando\ncontactar', 'step': 2},
-      {'label': 'Cotizando', 'step': 3},
-      {'label': 'Opcionado', 'step': 4},
-      {'label': 'Cerrado\nGanado', 'step': 5},
+      {'label': context.tr('referral_detail.status_no_contact'), 'step': 1},
+      {'label': context.tr('referral_detail.status_trying_contact'), 'step': 2},
+      {'label': context.tr('referral_detail.status_quote'), 'step': 3},
+      {'label': context.tr('referral_detail.status_optioned'), 'step': 4},
+      {'label': context.tr('referral_detail.status_closed_won'), 'step': 5},
     ];
 
     return Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class ReferralDetailHeader extends StatelessWidget {
   const ReferralDetailHeader({super.key});
@@ -19,7 +20,7 @@ class ReferralDetailHeader extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              'Detalle de referido',
+              context.tr('headers.referral_detail'),
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,

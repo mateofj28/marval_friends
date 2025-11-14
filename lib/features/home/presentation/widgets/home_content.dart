@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/utils/navigation_helper.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../widgets/user_profile_card.dart';
 import '../widgets/menu_card.dart';
 import '../../../referral/presentation/pages/referral_page.dart';
@@ -28,8 +29,8 @@ class HomeContent extends StatelessWidget {
               children: [
                 MenuCard(
                   icon: Iconsax.user_add,
-                  title: 'Referir',
-                  subtitle: 'Referir un amigo',
+                  title: context.tr('home.refer'),
+                  subtitle: context.tr('home.refer_subtitle'),
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const ReferralPage(),
@@ -37,8 +38,8 @@ class HomeContent extends StatelessWidget {
                 ),
                 MenuCard(
                   icon: Iconsax.chart,
-                  title: 'Estado de mis referidos',
-                  subtitle: 'Ver estado de referidos',
+                  title: context.tr('home.referral_status'),
+                  subtitle: context.tr('home.referral_status_subtitle'),
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const ReferralStatusPage(),
@@ -46,8 +47,8 @@ class HomeContent extends StatelessWidget {
                 ),
                 MenuCard(
                   icon: Iconsax.gift,
-                  title: 'Redimir premios',
-                  subtitle: 'Canjear tus premios',
+                  title: context.tr('home.redeem_prizes'),
+                  subtitle: context.tr('home.redeem_prizes_subtitle'),
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const RewardsPage(),
@@ -55,8 +56,8 @@ class HomeContent extends StatelessWidget {
                 ),
                 MenuCard(
                   icon: Iconsax.cup,
-                  title: 'Plan de premios',
-                  subtitle: 'Ver premios disponibles',
+                  title: context.tr('home.rewards_plan'),
+                  subtitle: context.tr('home.rewards_plan_subtitle'),
                   onTap: () => NavigationHelper.navigateWithSlideAnimation(
                     context,
                     const RewardsPlanPage(),

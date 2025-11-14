@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/auth/data/datasources/user_storage.dart';
 import '../../../../core/di/injection.dart';
 import 'tier_badge.dart';
@@ -91,8 +92,8 @@ class _UserProfileCardState extends State<UserProfileCard> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const TierBadge(
-                  label: 'Oro',
+                TierBadge(
+                  label: context.tr('profile.tier_gold'),
                   color: AppColors.gold,
                   isActive: true,
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../widgets/referral_header.dart';
 import '../widgets/referral_text_field.dart';
 import '../widgets/referral_question.dart';
@@ -42,7 +43,7 @@ class _ReferralPageState extends State<ReferralPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Por favor completa todos los campos',
+            context.tr('referral.validation_error'),
             style: GoogleFonts.poppins(),
           ),
           backgroundColor: Colors.red,
@@ -58,8 +59,8 @@ class _ReferralPageState extends State<ReferralPage> {
       cedula: _idController.text.trim(),
       email: _emailController.text.trim(),
       phone: _phoneController.text.trim(),
-      status: 'Sin Contactar',
-      message: 'Gracias por registrar a ${_nameController.text.trim()}',
+      status: context.tr('referral_status.no_contact'),
+      message: context.tr('referral.success_message', params: {'name': _nameController.text.trim()}),
       createdAt: DateTime.now(),
     );
 
@@ -83,7 +84,7 @@ class _ReferralPageState extends State<ReferralPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Referido registrado exitosamente',
+              context.tr('referral.success_title'),
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontSize: 18,
@@ -109,9 +110,9 @@ class _ReferralPageState extends State<ReferralPage> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _buildInfoRow('Cedula', referral.cedula),
-                  _buildInfoRow('Email', referral.email),
-                  _buildInfoRow('Telefono', referral.phone),
+                  _buildInfoRow(context.tr('referral.cedula'), referral.cedula),
+                  _buildInfoRow(context.tr('referral.email'), referral.email),
+                  _buildInfoRow(context.tr('referral.phone'), referral.phone),
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -123,7 +124,7 @@ class _ReferralPageState extends State<ReferralPage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      'Estado: ${referral.status}',
+                      '${context.tr('referral.status')}: ${referral.status}',
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -143,7 +144,7 @@ class _ReferralPageState extends State<ReferralPage> {
               Navigator.pop(context); // Volver a home
             },
             child: Text(
-              'OK',
+              context.tr('common.ok'),
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
               ),
@@ -198,40 +199,41 @@ class _ReferralPageState extends State<ReferralPage> {
                     const SizedBox(height: 20),
                     ReferralTextField(
                       controller: _nameController,
-                      hint: 'Nombre completo',
+                      hint: context.tr('referral.full_name'),
                       keyboardType: TextInputType.name,
                     ),
                     ReferralTextField(
                       controller: _idController,
-                      hint: 'Numero de cedula',
+                      hint: context.tr('referral.id_number'),
                       keyboardType: TextInputType.number,
                       maxLength: 10,
                     ),
                     ReferralTextField(
                       controller: _emailController,
-                      hint: 'Correo electronico',
+                      hint: context.tr('referral.email'),
                       keyboardType: TextInputType.emailAddress,
                     ),
                     ReferralTextField(
                       controller: _phoneController,
-                      hint: 'Telefono',
+                      hint: context.tr('referral.phone'),
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                     ),
                     const SizedBox(height: 20),
                     ReferralQuestion(
-                      question:
-                          'A ti te atendio Carolina. Deseas que tambien atienda a tu amigo?',
+                      question: context.tr('referral.carolina_question'),
                       value: _wantsCarolinaAttention,
                       onChanged: (value) {
                         setState(() {
                           _wantsCarolinaAttention = value;
                         });
                       },
+                      yesText: context.tr('referral.yes'),
+                      noText: context.tr('referral.no'),
                     ),
                     const SizedBox(height: 40),
                     SubmitButton(
-                      text: 'Enviar referido',
+                      text: context.tr('referral.submit'),
                       onPressed: _submitReferral,
                     ),
                     const SizedBox(height: 40),

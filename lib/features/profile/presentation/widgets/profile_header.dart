@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/auth/data/datasources/user_storage.dart';
 import '../../../../core/di/injection.dart';
 import '../../../home/presentation/widgets/tier_badge.dart';
@@ -72,9 +73,9 @@ class _ProfileHeaderState extends State<ProfileHeader> {
           ),
           const SizedBox(height: 12),
           // Tier badge
-          const Center(
+          Center(
             child: TierBadge(
-              label: 'Oro',
+              label: context.tr('profile.tier_gold'),
               color: AppColors.gold,
               isActive: true,
             ),
@@ -111,7 +112,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '6 de 10 referidos',
+                    context.tr('profile.referrals_progress', params: {'current': '6', 'total': '10'}),
                     style: GoogleFonts.poppins(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -119,7 +120,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     ),
                   ),
                   Text(
-                    'Faltan 4',
+                    context.tr('profile.referrals_remaining', params: {'count': '4'}),
                     style: GoogleFonts.poppins(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,

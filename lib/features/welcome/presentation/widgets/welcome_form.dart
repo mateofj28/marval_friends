@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/di/injection.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../login/presentation/bloc/login_bloc.dart';
 import '../../../login/presentation/bloc/login_event.dart';
 import '../../../login/presentation/bloc/login_state.dart';
@@ -40,7 +41,7 @@ class _WelcomeFormState extends State<WelcomeForm> {
   void _handleLogin() {
     final documento = _documentController.text.trim();
     if (documento.isEmpty) {
-      _showErrorDialog('Por favor ingresa tu documento');
+      _showErrorDialog(context.tr('login.error_empty_document'));
       return;
     }
     _loginBloc.add(LoginSubmitted(documento));
@@ -50,12 +51,12 @@ class _WelcomeFormState extends State<WelcomeForm> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Error'),
+        title: Text(context.tr('login.error_title')),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
+            child: Text(context.tr('common.ok')),
           ),
         ],
       ),
@@ -67,12 +68,12 @@ class _WelcomeFormState extends State<WelcomeForm> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Acceso Denegado'),
-        content: const Text('Aún no eres amigo Marval'),
+        title: Text(context.tr('login.access_denied_title')),
+        content: Text(context.tr('login.access_denied_message')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
+            child: Text(context.tr('common.ok')),
           ),
         ],
       ),
@@ -100,8 +101,8 @@ class _WelcomeFormState extends State<WelcomeForm> {
           children: [
             CustomTextField(
               controller: _documentController,
-              label: 'Ingresa Documento',
-              hint: 'Cedula',
+              label: context.tr('login.enter_document'),
+              hint: context.tr('login.document_hint'),
               icon: Iconsax.card,
               enabled: !isLoading,
               maxLength: 10,
@@ -113,15 +114,15 @@ class _WelcomeFormState extends State<WelcomeForm> {
             const SizedBox(height: 24),
             CustomTextField(
               controller: _tokenController,
-              label: 'Token',
-              hint: 'Token',
+              label: context.tr('login.token'),
+              hint: context.tr('login.token_hint'),
               icon: Iconsax.key,
               isPassword: true,
               enabled: !isLoading,
             ),
             const SizedBox(height: 40),
             PrimaryButton(
-              text: isLoading ? 'Validando...' : 'Ingresar',
+              text: isLoading ? context.tr('login.validating') : context.tr('login.login_button'),
               onPressed: isLoading ? null : _handleLogin,
             ),
             if (isLoading) ...[

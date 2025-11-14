@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class ReferralStatusHeader extends StatelessWidget {
   const ReferralStatusHeader({super.key});
@@ -24,7 +25,7 @@ class ReferralStatusHeader extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Estado de mis referidos',
+              context.tr('headers.referral_status'),
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,

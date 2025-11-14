@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../core/auth/data/datasources/user_storage.dart';
 import '../../../../core/di/injection.dart';
 import '../../../../core/router/app_router.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../settings/presentation/pages/theme_settings_page.dart';
 import '../pages/terms_conditions_page.dart';
 import 'profile_title.dart';
@@ -11,6 +12,7 @@ import 'profile_header.dart';
 import 'profile_stats_card.dart';
 import 'profile_menu_item.dart';
 import 'section_title.dart';
+import 'language_selector.dart';
 
 class ProfileContent extends StatelessWidget {
   const ProfileContent({super.key});
@@ -19,17 +21,17 @@ class ProfileContent extends StatelessWidget {
     // Mostrar diálogo de confirmación
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Cerrar sesión'),
-        content: const Text('¿Estás seguro que deseas cerrar sesión?'),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.tr('profile.logout_title')),
+        content: Text(context.tr('profile.logout_message')),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(context.tr('common.cancel')),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Cerrar sesión'),
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(context.tr('profile.logout')),
           ),
         ],
       ),
@@ -58,10 +60,12 @@ class ProfileContent extends StatelessWidget {
           const SizedBox(height: 24),
           const ProfileStatsCard(),
           const SizedBox(height: 24),
-          const SectionTitle(title: 'Configuración de cuenta'),
+          const LanguageSelector(),
+          const SizedBox(height: 24),
+          SectionTitle(title: context.tr('profile.account_settings')),
           ProfileMenuItem(
             icon: Iconsax.brush_2,
-            title: 'Apariencia',
+            title: context.tr('profile.appearance'),
             onTap: () {
               Navigator.push(
                 context,
@@ -73,7 +77,7 @@ class ProfileContent extends StatelessWidget {
           ),
           ProfileMenuItem(
             icon: Iconsax.document_text,
-            title: 'Términos y condiciones',
+            title: context.tr('profile.terms_conditions'),
             onTap: () {
               Navigator.push(
                 context,
@@ -85,7 +89,7 @@ class ProfileContent extends StatelessWidget {
           ),
           ProfileMenuItem(
             icon: Iconsax.logout,
-            title: 'Cerrar sesión',
+            title: context.tr('profile.logout'),
             onTap: () => _handleLogout(context),
             showDivider: false,
           ),

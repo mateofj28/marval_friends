@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../referral/data/providers/referral_provider.dart';
 
 class ProfileStatsCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class ProfileStatsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Estadisticas de usuario',
+                context.tr('profile.statistics'),
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -35,14 +36,14 @@ class ProfileStatsCard extends StatelessWidget {
               Expanded(
                 child: _StatCard(
                   value: '${referralProvider.totalReferrals}',
-                  label: 'Total de\nreferidos',
+                  label: context.tr('profile.total_referrals'),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _StatCard(
                   value: '${referralProvider.successfulReferrals}',
-                  label: 'Referidos\nexitosos',
+                  label: context.tr('profile.successful_referrals'),
                 ),
               ),              
             ],

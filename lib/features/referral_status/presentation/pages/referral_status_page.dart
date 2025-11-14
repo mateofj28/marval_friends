@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../widgets/referral_status_header.dart';
 import '../widgets/referral_status_card.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +18,42 @@ class ReferralStatusPage extends StatefulWidget {
 
 class _ReferralStatusPageState extends State<ReferralStatusPage> {
   String? _selectedFilter;
+
+  String _translateStatus(BuildContext context, String status) {
+    switch (status) {
+      case 'Sin Contactar':
+        return context.tr('referral_status.no_contact');
+      case 'Intentando Contactar':
+        return context.tr('referral_status.trying_contact');
+      case 'Cotización':
+      case 'Cotizacion':
+        return context.tr('referral_status.quote');
+      case 'Opcionado':
+        return context.tr('referral_status.optioned');
+      case 'Cerrado Ganado':
+        return context.tr('referral_status.closed_won');
+      default:
+        return status;
+    }
+  }
+
+  String _translateMessage(BuildContext context, String status) {
+    switch (status) {
+      case 'Sin Contactar':
+        return context.tr('referral_status.message_registered');
+      case 'Intentando Contactar':
+        return context.tr('referral_status.message_contacting');
+      case 'Cotización':
+      case 'Cotizacion':
+        return context.tr('referral_status.message_quoted');
+      case 'Opcionado':
+        return context.tr('referral_status.message_optioned');
+      case 'Cerrado Ganado':
+        return context.tr('referral_status.message_won');
+      default:
+        return '';
+    }
+  }
 
   Color _getStatusColor(String status) {
     switch (status) {
@@ -136,8 +173,9 @@ class _ReferralStatusPageState extends State<ReferralStatusPage> {
     final combinedReferrals = [
       ...savedReferrals.map((ref) => {
             'userName': ref.name,
-            'message': ref.message,
-            'status': ref.status,
+            'message': _translateMessage(context, ref.status),
+            'status': _translateStatus(context, ref.status),
+            'originalStatus': ref.status,
             'color': _getStatusColor(ref.status),
             'progress': _getStatusProgress(ref.status),
             'phone': ref.phone,
@@ -145,13 +183,18 @@ class _ReferralStatusPageState extends State<ReferralStatusPage> {
             'cedula': ref.cedula,
             'referralDate': DateFormat('dd/MM/yyyy').format(ref.createdAt),
           }),
-      ...allReferrals,
+      ...allReferrals.map((ref) => {
+            ...ref,
+            'message': _translateMessage(context, ref['status'] as String),
+            'status': _translateStatus(context, ref['status'] as String),
+            'originalStatus': ref['status'],
+          }),
     ];
 
     // Filtrar referidos según el filtro seleccionado
     final filteredReferrals = _selectedFilter == null
         ? combinedReferrals
-        : combinedReferrals.where((ref) => ref['status'] == _selectedFilter).toList();
+        : combinedReferrals.where((ref) => ref['originalStatus'] == _selectedFilter || ref['status'] == _selectedFilter).toList();
 
     final filterOptions = [
       'Sin Contactar',
@@ -179,7 +222,7 @@ class _ReferralStatusPageState extends State<ReferralStatusPage> {
                         children: [
                           _buildFilterChip(
                             context,
-                            label: 'Todos',
+                            label: context.tr('referral_status.all'),
                             isSelected: _selectedFilter == null,
                             onTap: () {
                               setState(() {
@@ -192,7 +235,7 @@ class _ReferralStatusPageState extends State<ReferralStatusPage> {
                               padding: const EdgeInsets.only(left: 12),
                               child: _buildFilterChip(
                                 context,
-                                label: filter,
+                                label: _translateStatus(context, filter),
                                 isSelected: _selectedFilter == filter,
                                 onTap: () {
                                   setState(() {
@@ -220,7 +263,7 @@ class _ReferralStatusPageState extends State<ReferralStatusPage> {
                             ),
                             const SizedBox(height: 16),
                             Text(
-                              'No hay referidos con este estado',
+                              context.tr('referral_status.no_referrals'),
                               style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: context.textSecondary,

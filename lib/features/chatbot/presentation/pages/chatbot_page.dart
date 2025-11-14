@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../data/datasources/faq_data.dart';
 import '../widgets/chat_message.dart';
 import '../widgets/faq_button.dart';
@@ -16,19 +17,21 @@ class ChatbotPage extends StatefulWidget {
 class _ChatbotPageState extends State<ChatbotPage> {
   final List<Map<String, dynamic>> _messages = [];
   final ScrollController _scrollController = ScrollController();
+  final TextEditingController _textController = TextEditingController();
   bool _showFaqs = true;
 
   @override
   void initState() {
     super.initState();
-    _addBotMessage(
-      'Hola! Soy tu asistente virtual de Amigos Marval. Selecciona una pregunta o escribeme tu duda.',
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _addBotMessage(context.tr('chatbot.welcome'));
+    });
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -59,6 +62,24 @@ class _ChatbotPageState extends State<ChatbotPage> {
     _addUserMessage(question);
     Future.delayed(const Duration(milliseconds: 500), () {
       _addBotMessage(answer);
+      Future.delayed(const Duration(milliseconds: 300), () {
+        setState(() {
+          _showFaqs = true;
+        });
+      });
+    });
+  }
+
+  void _handleSendMessage() {
+    final text = _textController.text.trim();
+    if (text.isEmpty) return;
+
+    _addUserMessage(text);
+    _textController.clear();
+
+    // Simular respuesta del bot
+    Future.delayed(const Duration(milliseconds: 800), () {
+      _addBotMessage(context.tr('chatbot.auto_response'));
       Future.delayed(const Duration(milliseconds: 300), () {
         setState(() {
           _showFaqs = true;
@@ -148,7 +169,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Asistente Virtual',
+                  context.tr('chatbot.title'),
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -156,7 +177,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
                   ),
                 ),
                 Text(
-                  'En linea',
+                  context.tr('chatbot.online'),
                   style: GoogleFonts.poppins(
                     fontSize: 12,
                     color: Colors.green,
@@ -189,7 +210,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
-              'Preguntas frecuentes',
+              context.tr('chatbot.faq_title'),
               style: GoogleFonts.poppins(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -197,7 +218,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
               ),
             ),
           ),
-          ...FaqData.faqs.map((faq) => FaqButton(
+          ...FaqData.getFaqs(context).map((faq) => FaqButton(
                 question: faq.question,
                 onTap: () => _handleFaqTap(faq.question, faq.answer),
               )),
@@ -223,32 +244,54 @@ class _ChatbotPageState extends State<ChatbotPage> {
         children: [
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: context.background,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(24),
+                border: Border.all(
+                  color: Colors.grey.shade300,
+                  width: 1,
+                ),
               ),
-              child: Text(
-                'Escribe tu mensaje...',
+              child: TextField(
+                controller: _textController,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  color: context.textLight,
+                  color: context.darkNavy,
                 ),
+                decoration: InputDecoration(
+                  hintText: context.tr('chatbot.type_message'),
+                  hintStyle: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: Colors.grey.shade500,
+                  ),
+                  filled: false,
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                ),
+                maxLines: null,
+                textCapitalization: TextCapitalization.sentences,
+                onSubmitted: (_) => _handleSendMessage(),
               ),
             ),
           ),
           const SizedBox(width: 12),
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: context.primaryBlue.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Iconsax.send_1,
-              color: context.primaryBlue,
-              size: 20,
+          GestureDetector(
+            onTap: _handleSendMessage,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: context.primaryBlue.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Iconsax.send_1,
+                color: context.primaryBlue,
+                size: 20,
+              ),
             ),
           ),
         ],

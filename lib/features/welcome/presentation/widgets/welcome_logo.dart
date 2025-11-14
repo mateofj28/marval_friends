@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/l10n/app_localizations.dart';
 
 class WelcomeLogo extends StatelessWidget {
   const WelcomeLogo({super.key});
@@ -66,7 +67,7 @@ class WelcomeLogo extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: 'Amigos Marval',
+                text: context.tr('app_name'),
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

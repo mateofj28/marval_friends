@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_extensions.dart';
+import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/utils/currency_input_formatter.dart';
 import '../widgets/coupon_display.dart';
 
@@ -34,20 +35,20 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
 
   String? _validateAmount(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Por favor ingresa un monto';
+      return context.tr('coupon.validation_empty');
     }
 
     final amount = int.tryParse(value.replaceAll('.', '').replaceAll(',', ''));
     if (amount == null) {
-      return 'Ingresa un valor numerico valido';
+      return context.tr('coupon.validation_invalid');
     }
 
     if (amount < 2000) {
-      return 'El monto minimo es \$2.000';
+      return context.tr('coupon.validation_min');
     }
 
     if (amount > 3000000) {
-      return 'El monto maximo es \$3.000.000';
+      return context.tr('coupon.validation_max');
     }
 
     return null;
@@ -79,7 +80,7 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
     } catch (e) {
       setState(() {
         _isLoading = false;
-        _errorMessage = 'Error al generar el cupon. Intenta nuevamente.';
+        _errorMessage = context.tr('coupon.error');
       });
     }
   }
@@ -129,7 +130,7 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
           ),
           Expanded(
             child: Text(
-              'Generar Cupon',
+              context.tr('headers.coupon'),
               style: GoogleFonts.poppins(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -222,7 +223,7 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Monto del cupon',
+          context.tr('coupon.amount'),
           style: GoogleFonts.poppins(
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -255,7 +256,7 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
               fontWeight: FontWeight.w600,
               color: context.darkNavy,
             ),
-            helperText: 'Monto entre \$2.000 y \$3.000.000',
+            helperText: context.tr('coupon.amount_range'),
             helperStyle: GoogleFonts.poppins(
               fontSize: 13,
               color: context.textSecondary,
@@ -356,7 +357,7 @@ class _CouponGenerationPageState extends State<CouponGenerationPage> {
               ),
             )
           : Text(
-              'Obtener cupon',
+              context.tr('coupon.generate'),
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
