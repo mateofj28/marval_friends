@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/theme_extensions.dart';
@@ -14,11 +15,35 @@ class RewardsPlanPage extends StatefulWidget {
 class _RewardsPlanPageState extends State<RewardsPlanPage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  Timer? _autoScrollTimer;
+
+  // Extensiones de las imagenes de publicidad
+  final List<String> _promoExtensions = ['jpeg', 'jpeg', 'jpeg', 'jpg'];
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
 
   @override
   void dispose() {
+    _autoScrollTimer?.cancel();
     _pageController.dispose();
     super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _autoScrollTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
+      if (_pageController.hasClients) {
+        final nextPage = (_currentPage + 1) % 4;
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 400),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
   }
 
   @override
@@ -154,39 +179,48 @@ class _RewardsPlanPageState extends State<RewardsPlanPage> {
                           _currentPage = index;
                         });
                       },
-                      itemCount: 3,
+                      itemCount: 4,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: context.surface,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: context.background,
-                                width: 2,
-                              ),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_outlined,
-                                    size: 48,
-                                    color: context.textLight,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Publicidad ${index + 1}',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      color: context.textSecondary,
-                                      fontWeight: FontWeight.w500,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset(
+                              'assets/images/promos/promo_${index + 1}.${_promoExtensions[index]}',
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: context.surface,
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: context.background,
+                                      width: 2,
                                     ),
                                   ),
-                                ],
-                              ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.image_outlined,
+                                          size: 48,
+                                          color: context.textLight,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          'Publicidad ${index + 1}',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16,
+                                            color: context.textSecondary,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         );
@@ -198,7 +232,7 @@ class _RewardsPlanPageState extends State<RewardsPlanPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
-                      3,
+                      4,
                       (index) => Container(
                         margin: const EdgeInsets.symmetric(horizontal: 4),
                         width: _currentPage == index ? 24 : 8,

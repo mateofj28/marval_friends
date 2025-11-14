@@ -5,15 +5,11 @@ import '../../../../core/theme/theme_extensions.dart';
 
 class ReferralUserHeader extends StatelessWidget {
   final String userName;
-  final String phone;
-  final String email;
   final String referralDate;
 
   const ReferralUserHeader({
     super.key,
     required this.userName,
-    required this.phone,
-    required this.email,
     required this.referralDate,
   });
 
@@ -77,12 +73,7 @@ class ReferralUserHeader extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          Icon(
-            Iconsax.arrow_right_3,
-            color: context.textSecondary,
-            size: 20,
-          ),
+          ),          
         ],
       ),
     );
